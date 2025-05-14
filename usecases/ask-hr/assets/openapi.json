@@ -1,0 +1,426 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "FastAPI",
+        "version": "0.1.0"
+    },
+    "servers": [
+        {
+            "url": "https://hr-skills-app.1rqct68sp2fr.us-south.codeengine.appdomain.cloud",
+            "description": "Production server"
+        }
+    ],
+    "tags": [],
+    "security": [
+        {
+            "BasicAuth": []
+        }
+    ],
+    "paths": {
+        "/user_profile_details/{name}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The unique identifier of the user.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Name"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+    					"type": "object",
+    					"properties": {
+        					"name": {"type": "string"},
+        					"title": {"type": "string"},
+        					"address": {"type": "string"},
+        					"time_off_balance": {"type": "integer"}
+    							}
+					}
+
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Get User Profile",
+                "operationId": "GetUserProfileDetails"
+            }
+        },
+        "/time-off-balance/{name}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the user.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Name"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+    					"type": "string",
+    					"description": "Remaining time-off balance as a single string."
+				}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Get Time Off Balance",
+                "operationId": "GetTimeOffBalanceData"
+            }
+        },
+        "/request-time-off": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+    					"type": "string",
+    					"description": "Confirmation message as a single string."
+				}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TimeOffRequest"
+                            }
+                        }
+                    }
+                },
+                "summary": "Request Time Off",
+                "operationId": "ToRequestTimeOff"
+            }
+        },
+        "/update-title": {
+            "put": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+    					"type": "string",
+    					"description": "Confirmation message as a single string."
+				}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTitleRequest"
+                            }
+                        }
+                    }
+                },
+                "summary": "Update Title",
+                "operationId": "ToUpdateTitle"
+            }
+        },
+        "/update-address": {
+            "put": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+    					"type": "string",
+   					"description": "Confirmation message as a single string."
+					}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateAddressRequest"
+                            }
+                        }
+                    }
+                },
+                "summary": "Update Address",
+                "operationId": "ToUpdateAddress"
+            }
+        },
+        "/create-user": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+    					"type": "string",
+    					"description": "Confirmation message including user ID as a single string."
+					}
+
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserRequest"
+                            }
+                        }
+                    }
+                },
+                "summary": "Create User",
+                "operationId": "ToCreateUser"
+            }
+        }
+    },
+    "components": {
+	"securitySchemes": {
+            "BasicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "CreateUserRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Full name of the user.",
+                        "title": "Name"
+                    },
+                    "time_off_balance": {
+                        "type": "integer",
+                        "description": "Initial time-off balance in days.",
+                        "title": "Time Off Balance"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Job title of the user.",
+                        "title": "Title"
+                    },
+                    "address": {
+                        "type": "string",
+                        "description": "Address of the user.",
+                        "title": "Address"
+                    }
+                },
+                "required": [
+                    "name",
+                    "time_off_balance",
+                    "title",
+                    "address"
+                ],
+                "title": "CreateUserRequest"
+            },
+            "HTTPValidationError": {
+                "type": "object",
+                "properties": {
+                    "detail": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "description": "List of validation errors.",
+                        "title": "Detail"
+                    }
+                },
+                "title": "HTTPValidationError"
+            },
+            "TimeOffRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the user.",
+                        "title": "Name"
+                    },
+                    "from_date": {
+                        "type": "string",
+                        "description": "Start date of the time-off request (YYYY-MM-DD).",
+                        "format": "date",
+                        "title": "From Date"
+                    },
+                    "to_date": {
+                        "type": "string",
+                        "description": "End date of the time-off request (YYYY-MM-DD).",
+                        "format": "date",
+                        "title": "To Date"
+                    }
+                },
+                "required": [
+                    "name",
+                    "from_date",
+                    "to_date"
+                ],
+                "title": "TimeOffRequest"
+            },
+            "UpdateAddressRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the user.",
+                        "title": "Name"
+                    },
+                    "new_address": {
+                        "type": "string",
+                        "description": "The updated address of the user.",
+                        "title": "New Address"
+                    }
+                },
+                "required": [
+                    "name",
+                    "new_address"
+                ],
+                "title": "UpdateAddressRequest"
+            },
+            "UpdateTitleRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the user.",
+                        "title": "Name"
+                    },
+                    "new_title": {
+                        "type": "string",
+                        "description": "The updated job title of the user.",
+                        "title": "New Title"
+                    }
+                },
+                "required": [
+                    "name",
+                    "new_title"
+                ],
+                "title": "UpdateTitleRequest"
+            },
+            "ValidationError": {
+                "type": "object",
+                "properties": {
+                    "loc": {
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "description": "The location of the error in the request.",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "description": "A message describing the error.",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The type of error.",
+                        "title": "Error Type"
+                    }
+                },
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        }
+    }
+}
